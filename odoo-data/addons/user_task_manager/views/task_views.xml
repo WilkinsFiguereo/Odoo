@@ -32,7 +32,7 @@
                 <field name="priority"/>
                 <field name="state"/>
                 <field name="deadline"/>
-                <field name="id_done"/>
+                <field name="is_done"/>
             </list>
         </field>
     </record>
