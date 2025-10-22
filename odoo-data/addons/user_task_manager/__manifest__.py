@@ -15,4 +15,9 @@
     ],
     'installable': True,
     'application': True,
+    'assets': {
+        'web.assets_backend': [
+            'user_task_manager/static/src/css/task_kanban.css',
+        ],
+    },
 }

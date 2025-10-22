@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- vista tipo formulario -->
+    <!-- Vista tipo formulario -->
     <record id="view_task_form" model="ir.ui.view">
         <field name="name">user.task.form</field>
         <field name="model">user.task</field>
@@ -13,16 +13,58 @@
                         <field name="description"/>
                         <field name="priority"/>
                         <field name="state"/>
-                        <field name="deadline">
-                        <field name="user_id" readonly='1'/>
-                        <field name="id_done" readonly='1'/147>
+                        <field name="deadline"/>
+                        <field name="user_id" readonly="1"/>
+                        <field name="is_done" readonly="1"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- vista tipo lista -->
+    <!-- Vista tipo Kanban -->
+    <record id="view_user_task_kanban" model="ir.ui.view">
+    <field name="name">user.task.kanban</field>
+    <field name="model">user.task</field>
+    <field name="arch" type="xml">
+        <kanban default_group_by="state" class="o_kanban_small_column">
+            <field name="name"/>
+            <field name="priority"/>
+            <field name="state"/>
+            <field name="deadline"/>
+            <field name="is_done"/>
+            <templates>
+                <!-- Kanban Box -->
+                <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_card oe_kanban_global_click o_kanban_priority_#{record.priority.raw_value}">
+                        <t t-call="user_task_manager.kanban_content"/>
+                    </div>
+                </t>
+
+                <!-- Plantilla de contenido -->
+                <t t-name="user_task_manager.kanban_content">
+                    <div class="o_kanban_details">
+                        <strong><field name="name"/></strong>
+                        <div>
+                            <span><strong>Prioridad: </strong><field name="priority"/></span>
+                        </div>
+                        <div>
+                            <span><strong>Estado: </strong><field name="state"/></span>
+                        </div>
+                        <div>
+                            <span><strong>Fecha Límite: </strong><field name="deadline"/></span>
+                        </div>
+                        <div>
+                            <span><strong>Completada: </strong><field name="is_done"/></span>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+    <!-- Vista tipo lista -->
     <record id="view_user_task_list" model="ir.ui.view">
         <field name="name">user.task.list</field>
         <field name="model">user.task</field>
@@ -37,19 +79,19 @@
         </field>
     </record>
 
-    <!-- accion para abrir la vista -->
+    <!-- Acción para abrir la vista -->
     <record id="acction_user_task" model="ir.actions.act_window">
         <field name="name">Mis tareas</field>
         <field name="res_model">user.task</field>
-        <field name="view_mode">list,form</field>
-        <field name="help" type='html'>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
             <h2>Gestiona tus tareas</h2>
             <p>Crea y administra tus tareas personales desde esta vista.</p>
         </field>
     </record>
 
-    <!-- menu -->
-
+    <!-- Menú -->
     <menuitem id="menu_user_task_root" name="Gestor de Tareas" sequence="10"/>
     <menuitem id="menu_user_task" name="Mis Tareas" parent="menu_user_task_root" action="acction_user_task" sequence="20"/>
+
 </odoo>
