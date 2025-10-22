@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- vista tipo formulario -->
+    <record id="view_task_form" model="ir.ui.view">
+        <field name="name">user.task.form</field>
+        <field name="model">user.task</field>
+        <field name="arch" type="xml">
+            <form string="Tarea">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="priority"/>
+                        <field name="state"/>
+                        <field name="deadline">
+                        <field name="user_id" readonly='1'/>
+                        <field name="id_done" readonly='1'/147>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- vista tipo lista -->
+    <record id="view_user_task_list" model="ir.ui.view">
+        <field name="name">user.task.list</field>
+        <field name="model">user.task</field>
+        <field name="arch" type="xml">
+            <list string="Tareas">
+                <field name="name"/>
+                <field name="priority"/>
+                <field name="state"/>
+                <field name="deadline"/>
+                <field name="id_done"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- accion para abrir la vista -->
+    <record id="acction_user_task" model="ir.actions.act_window">
+        <field name="name">Mis tareas</field>
+        <field name="res_model">user.task</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type='html'>
+            <h2>Gestiona tus tareas</h2>
+            <p>Crea y administra tus tareas personales desde esta vista.</p>
+        </field>
+    </record>
+
+    <!-- menu -->
+
+    <menuitem id="menu_user_task_root" name="Gestor de Tareas" sequence="10"/>
+    <menuitem id="menu_user_task" name="Mis Tareas" parent="menu_user_task_root" action="acction_user_task" sequence="20"/>
+</odoo>
