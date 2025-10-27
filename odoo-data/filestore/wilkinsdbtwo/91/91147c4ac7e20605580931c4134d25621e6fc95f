@@ -1028,6 +1028,9 @@
 /* /website/static/src/scss/website_controller_page_kanban.scss */
  .o_kanban_view.o-website-controller-page-kanban .o_kanban_record{min-height: 90px;}.o_kanban_view.o-website-controller-page-kanban .o_kanban_grouped .o_kanban_record{justify-content: space-around !important;}.o_kanban_view.o-website-controller-page-kanban .o_kanban_ungrouped .o_kanban_record{width: 100%; flex-flow: row;}.o_kanban_view.o-website-controller-page-kanban .o_kanban_ungrouped .o_kanban_record [data-section='data']{width: 30%;}
 
+/* /user_task_manager/static/src/css/task_kanban.css */
+ .user_task_kanban.priority_0{background-color: #f8f9fa; border-left: 4px solid #6c757d;}.user_task_kanban.priority_1{background-color: #fff3cd; border-left: 4px solid #ffc107;}.user_task_kanban.priority_2{background-color: #f8d7da; border-left: 4px solid #dc3545;}.user_task_kanban.priority_3{background-color: #d1ecf1; border-left: 4px solid #0dcaf0;}.task-state-badge{padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;}.task-state-badge.state-pending{background-color: #ffc107; color: #000;}.task-state-badge.state-in_progress{background-color: #0dcaf0; color: #000;}.task-state-badge.state-done{background-color: #198754; color: #fff;}.task-done{color: #198754; font-size: 24px;}.o_kanban_details{padding: 8px;}.o_kanban_details div{margin-bottom: 4px;}.o_kanban_details strong{color: #495057;}.oe_kanban_footer{padding: 8px; border-top: 1px solid #e9ecef;}.fa-calender{margin-right: 4px; color: #6c757d;}.fa-user{margin-right: 4px; color: #6c757d;}.o_kanban_small_column .oe_kanban_card{min-height: 120px;}
+
 /* /iap_mail/static/src/scss/iap_mail.scss */
  .o_partner_autocomplete_enrich_info i{min-width: fit-content;}
 

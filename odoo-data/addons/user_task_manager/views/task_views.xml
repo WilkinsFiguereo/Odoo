@@ -33,12 +33,22 @@
             <field name="state"/>
             <field name="deadline"/>
             <field name="is_done"/>
+            <field name="user_id"/>
             <templates>
                 <!-- Kanban Box -->
+
+
                 <t t-name="kanban-box">
-                    <div t-attf-class="oe_kanban_card oe_kanban_global_click o_kanban_priority_#{record.priority.raw_value}">
-                        <t t-call="user_task_manager.kanban_content"/>
-                    </div>
+                    <t t-if="record.priority and record.priority.raw_value">
+                        <div t-attf-class="'oe_kanban_card user_task_kanban oe_kanban_global_click priority_'+ record.priority.raw_value">
+                            <t t-call="user_task_manager.kanban_content"/>
+                        </div>
+                    </t>
+                    <t t-if="!(record.priority and record.priority.raw_value)">
+                        <div t-attf-class="'oe_kanban_card user_task_kanban oe_kanban_global_click priority_0'">
+                            <t t-call="user_task_manager.kanban_content"/>
+                        </div>
+                    </t>
                 </t>
 
                 <!-- Plantilla de contenido -->
@@ -46,18 +56,43 @@
                     <div class="o_kanban_details">
                         <strong><field name="name"/></strong>
                         <div>
+                            <span><strong>Descripcion: </strong><field name="description"/></span>
+                        </div>
+                        <div>
                             <span><strong>Prioridad: </strong><field name="priority"/></span>
                         </div>
                         <div>
                             <span><strong>Estado: </strong><field name="state"/></span>
                         </div>
                         <div>
+                            <i class='fa fa-calender'/>
                             <span><strong>Fecha Límite: </strong><field name="deadline"/></span>
                         </div>
                         <div>
                             <span><strong>Completada: </strong><field name="is_done"/></span>
                         </div>
                     </div>
+
+                    <div class="oe_kanban_footer d-flex justify-content-between align-items-center">
+                        <span class="o_kanban_record_creator">
+                            <i class='fa fa-user'/>
+                            <strong>Asignada a: </strong>
+                            <field name="user_id"/>
+                        </span>
+
+                        <t t-if='record.priority and record.priority.raw_value'>
+                            <span class="badge badge-primary" t-attf-class="task-state-badge state-#(record.state.raw_value)">
+                                <t t-esc="record.state.value"/>
+                            </span>
+                        </t>
+                    </div>
+
+                    <t t-if="record.is_done and record.is_done.raw_value">
+                        <div class="o_kanban_badge o_kanban_bottom_right">
+                            <i class="fa fa-check-circle task-done" aria-hidden="true" title="Tarea Completada"/>
+                        </div>
+                        
+                    </t>
                 </t>
             </templates>
         </kanban>
